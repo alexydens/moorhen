@@ -22,7 +22,7 @@ else
 endif
 # Flags
 CFLAGS = -std=c99 -pedantic -Wall -Wextra
-LDFLAGS = -lm -lpthread
+LDFLAGS = -lm -lpthread -O3 -ffast-math
 
 # Directories for build
 SRC_DIR=src
