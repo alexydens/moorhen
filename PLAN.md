@@ -63,18 +63,19 @@ a system exception and also can be handled in the program itself.
 
 ### Base:
 #### Context Cracking:
-- Compiler, and with that:
-- Architecture.
-- Operating system.
+- [x] Compiler, and with that:
+- [x] Architecture.
+- [x] Operating system.
 #### Hot reloading:
 - Might be interesting to try and implement.
 #### Simple Types:
-- Rust style ux, ix, and fx types.
-- A bool type for booleans (`#if !defined(__cplusplus)`)
+- [x] Rust style ux, ix, and fx types.
+- A bool type for booleans (`#if !defined(__cplusplus)`).
+    - oh, you know what: `#include <stdbool.h>`
 #### Symbolic consts:
-- Max and min for relevant types.
-- Float's machine epsilons.
-- Euler's number, pi.
+- [x] Max and min for relevant types.
+- Float's machine epsilons. In `float.h`.
+- [x] Euler's number, pi.
 #### Optimisations:
 - SIMD Optimisations.
 - Increase cache hits if possible (not sure I get in practise).
@@ -115,11 +116,12 @@ much.
 
 ### Logging:
 #### Assertions:
-- A new `ASSERT_ONFAIL`.
+- [x] A new `ASSERT_ONFAIL`.
 #### Output:
 - Log to file, `stderr` or `stdout` (just pass in a file descriptor).
-- Info, success, error, fatal (exits).
-- Colours (to use in general, for success, error, etc) (with ANSI escape codes).
+- [x] Info, success, error, fatal (exits).
+- [x] Colours (to use in general, for success, error, etc) 
+(with ANSI escape codes).
 
 ### Files/Saved Data:
 #### Basic File I/O:

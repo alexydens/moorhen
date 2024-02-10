@@ -3,4 +3,5 @@
 -Wall
 -Wextra
 -Wno-unused-variable
+-Wno-pragma-pack
 -I./include
