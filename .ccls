@@ -4,4 +4,5 @@
 -Wextra
 -Wno-unused-variable
 -Wno-pragma-pack
+-Wno-variadic-marco
 -I./include

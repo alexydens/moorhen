@@ -42,7 +42,7 @@ void log_common(const char* file, u64 line, u8 index) {
   struct tm* local_time = localtime(&curr_time);
   strftime(time_str, 1024, "%H:%M:%S", local_time);
   fprintf(
-      stdout, "%s%s %s%s %s%s:%lu: %s",
+      LOG_FILE, "%s%s %s%s %s%s:%lu: %s",
       TIME_CODE, time_str,
       codes[index], types[index],
       SOURCE_CODE, file, line,
@@ -55,35 +55,35 @@ void _log_success(const char* file, u64 line, const char* fmt, ...) {
   va_list args;
   log_common(file, line, 0);
   va_start(args, fmt);
-  vfprintf(stdout, fmt, args);
+  vfprintf(LOG_FILE, fmt, args);
   va_end(args);
-  fprintf(stdout, "\x1b[0m\n");
+  fprintf(LOG_FILE, "\x1b[0m\n");
 }
 /* Info */
 void _log_info(const char* file, u64 line, const char* fmt, ...) {
   va_list args;
   log_common(file, line, 1);
   va_start(args, fmt);
-  vfprintf(stdout, fmt, args);
+  vfprintf(LOG_FILE, fmt, args);
   va_end(args);
-  fprintf(stdout, "\x1b[0m\n");
+  fprintf(LOG_FILE, "\x1b[0m\n");
 }
 /* Error */
 void _log_error(const char* file, u64 line, const char* fmt, ...) {
   va_list args;
   log_common(file, line, 2);
   va_start(args, fmt);
-  vfprintf(stdout, fmt, args);
+  vfprintf(LOG_FILE, fmt, args);
   va_end(args);
-  fprintf(stdout, "\x1b[0m\n");
+  fprintf(LOG_FILE, "\x1b[0m\n");
 }
 /* Fatal */
 void _log_fatal(const char* file, u64 line, const char* fmt, ...) {
   va_list args;
   log_common(file, line, 3);
   va_start(args, fmt);
-  vfprintf(stdout, fmt, args);
+  vfprintf(LOG_FILE, fmt, args);
   va_end(args);
-  fprintf(stdout, "\x1b[0m\n");
+  fprintf(LOG_FILE, "\x1b[0m\n");
   exit(EXIT_FAILURE);
 }

@@ -53,18 +53,27 @@ $(BUILD_DIR)/base.o: $(SRC_DIR)/base.c
 	$(CC) -c $< -I./$(INCLUDE_DIR)/ $(CFLAGS) -o $@
 $(BUILD_DIR)/logging.o: $(SRC_DIR)/logging.c
 	$(CC) -c $< -I./$(INCLUDE_DIR)/ $(CFLAGS) -o $@
+$(BUILD_DIR)/arena_alloc.o: $(SRC_DIR)/arena_alloc.c
+	$(CC) -c $< -I./$(INCLUDE_DIR)/ $(CFLAGS) -o $@
 
 # The library itself
-$(BUILD_DIR)/$(LIBFILE): $(BUILD_DIR)/base.o $(BUILD_DIR)/logging.o
-	ar rcs $@ $(BUILD_DIR)/*.o
+$(BUILD_DIR)/$(LIBFILE): $(BUILD_DIR)/base.o \
+	$(BUILD_DIR)/logging.o \
+	$(BUILD_DIR)/arena_alloc.o
+	$(AR) rcs $@ $(BUILD_DIR)/*.o
 
 # Testing the library
 $(BUILD_DIR)/$(TESTFILE): $(BUILD_DIR)/$(LIBFILE)
 	$(CC) $(TEST_DIR)/*.c $(BUILD_DIR)/$(LIBFILE) \
 		-I./$(INCLUDE_DIR)/ $(CFLAGS) -DENABLE_ASSERT $(LDFLAGS) -o $@
 
+# Testing the library
+$(BUILD_DIR)/gdb_$(TESTFILE): $(BUILD_DIR)/$(LIBFILE)
+	$(CC) -ggdb $(TEST_DIR)/*.c $(BUILD_DIR)/$(LIBFILE) \
+		-I./$(INCLUDE_DIR)/ $(CFLAGS) -DENABLE_ASSERT $(LDFLAGS) -o $@
+
 # PHONY TARGETS: NOT FILES
-.PHONY: clean test
+.PHONY: clean test gdb
 
 # Clear build directory
 clean:
@@ -73,3 +82,7 @@ clean:
 # Test the library
 test: $(BUILD_DIR)/$(TESTFILE)
 	./$(BUILD_DIR)/$(TESTFILE)
+
+# Test the library
+gdb: $(BUILD_DIR)/gdb_$(TESTFILE)
+	./$(BUILD_DIR)/gdb_$(TESTFILE)

@@ -25,6 +25,7 @@
 - CGLM or Kazmath for linear algebra and matrix manipulation?
 - SDL2 for windowing?
 - Xlib for windowing?
+- Wayland for windowing?
 - Win32 API.
 - libcurses for terminal I/O.
 - CImGUI for UI in windowed applications (particularly with any form of graphics
@@ -74,7 +75,7 @@ a system exception and also can be handled in the program itself.
     - oh, you know what: `#include <stdbool.h>`
 #### Symbolic consts:
 - [x] Max and min for relevant types.
-- Float's machine epsilons. In `float.h`.
+- [x] Float's machine epsilons. In `float.h`.
 - [x] Euler's number, pi.
 #### Optimisations:
 - SIMD Optimisations.
@@ -89,8 +90,8 @@ much.
 ### Memory:
 #### Allocators:
 - __Allocator union and type.__
-- Arena.
-- Chunk.
+- [x] Arena (linear).
+- [x] Pool (chunk).
 #### Structured Data Types:
 - Dynamic array.
 - Stack (fixed size).
