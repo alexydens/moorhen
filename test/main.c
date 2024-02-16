@@ -53,6 +53,10 @@ void test_base() {
   ASSERT(MAX(5, 5) == 5);
   log_success("MAX(): Same val.");
   log_newline();
+  ASSERT(LERP(0, 10, 0.5) == 5);
+  ASSERT(LERP(10, 0, 0.2) == 2);
+  log_success("LERP().");
+  log_newline();
 }
 void test_arena_alloc() {
   /* TODO */

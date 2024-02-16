@@ -49,6 +49,8 @@ typedef double    f64;
 #define MAX(A, B)           ((A) > (B) ? (A) : (B))
 /* Get the minimum of the two values */
 #define MIN(A, B)           ((A) < (B) ? (A) : (B))
+/* Linear interpolation between two values */
+#define LERP(A, B, V)       (MIN((A), (B)) + (MAX((A), (B)) - MIN((A), (B)))*(V))
 
 /* Assertions */
 #if defined (ENABLE_ASSERT)

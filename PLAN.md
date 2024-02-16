@@ -30,6 +30,8 @@
 - libcurses for terminal I/O.
 - CImGUI for UI in windowed applications (particularly with any form of graphics
 API contexts.
+- GMP for big numbers.
+- OpenSSL for cryptography.
 ### CRT Functions:
 - `getopt_long()` for parsing command line options.
 - `select()` and `fd_set` for managing blocking I/O functions.
@@ -101,7 +103,7 @@ much.
 ### Maths:
 #### Floats:
 - Linear interpolation.
-- Infinity const.
+- [x] Infinity const.
 #### Vectors:
 - Add, subtract.
 - Dot product, cross product.
