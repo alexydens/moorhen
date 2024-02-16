@@ -102,8 +102,8 @@ much.
 
 ### Maths:
 #### Floats:
-- Linear interpolation.
-- [x] Infinity const.
+- [x] Linear interpolation.
+- [x] Infinity const (STDLIB).
 #### Vectors:
 - Add, subtract.
 - Dot product, cross product.
