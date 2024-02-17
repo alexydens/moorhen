@@ -57,6 +57,8 @@ void test_base() {
   ASSERT(LERP(10, 0, 0.2) == 2);
   log_success("LERP().");
   log_newline();
+  log("Testing log with no type...");
+  log_newline();
 }
 void test_arena_alloc() {
   /* TODO */
