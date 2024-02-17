@@ -40,7 +40,7 @@ extern void _log_error(const char* file, u64 line, const char* fmt, ...);
 extern void _log_fatal(const char* file, u64 line, const char* fmt, ...);
 
 /* Inlines */
-inline void log_newline() {fprintf(LOG_FILE, "\n");}
+#define log_newline() fprintf(LOG_FILE, "\n");
 #define log(fmt, ...) fprintf(LOG_FILE, fmt, ##__VA_ARGS__)
 
 #endif /* MH_LOGGING_H */
