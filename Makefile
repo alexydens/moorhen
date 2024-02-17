@@ -73,11 +73,14 @@ $(BUILD_DIR)/gdb_$(TESTFILE): $(BUILD_DIR)/$(LIBFILE)
 		-I./$(INCLUDE_DIR)/ $(CFLAGS) -DENABLE_ASSERT $(LDFLAGS) -o $@
 
 # PHONY TARGETS: NOT FILES
-.PHONY: clean test gdb
+.PHONY: clean test gdb build
 
 # Clear build directory
 clean:
 	rm -rf $(BUILD_DIR)/*
+
+# Build the library
+build: $(BUILD_DIR)/$(LIBFILE)
 
 # Test the library
 test: $(BUILD_DIR)/$(TESTFILE)
