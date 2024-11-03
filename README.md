@@ -3,6 +3,10 @@
 ### The animal
 A moorhen is a type of waterfowl, a close relative of the coot. They tend to
 have black feathers and are small in size, somewhere between a pigeon and a duck.
+#### How do I differentiate moorhens from coots?
+Coots have white flesh above their beaks, whereas moorhens have red flesh avove
+their yellow beaks, at least in my experience. I wouldn't advise looking for
+birdspotting advice on github. Perhaps try [Wikipedia](https://en.wikipedia.org/wiki/Moorhen).
 ### This project
 This is just a small header-only base library, written using the C11 standard,
 to hold some basic utilities that I use in my other projects, so I don't end up
