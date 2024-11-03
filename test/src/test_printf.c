@@ -28,6 +28,12 @@ void test_printf(void) {
   _printf(_putc, "-> TEST: capital hex (should be E1A):              \'%X\'\n", 0xe1a);
   /* Test special formats for numbers */
   _printf(_putc, "-> TEST: number with +/- (should be +1234):        \'%+d\'\n", 1234);
+  _printf(_putc, "-> TEST: number with  /- (should be  1234):        \'% d\'\n", 1234);
   _printf(_putc, "-> TEST: number with zeroes (should be 00001234):  \'%08d\'\n", 1234);
   _printf(_putc, "-> TEST: number with padding (should be 1234    ): \'%8d\'\n", 1234);
+  _printf(_putc, "-> TEST: hex with base (should be 0xe1a):          \'%#x\'\n", 0xe1a);
+  _printf(_putc, "-> TEST: capital hex with base (should be 0xE1A):  \'%#X\'\n", 0xe1a);
+  /* Test special formats for strings */
+  _printf(_putc, "-> TEST: string with padding (should be hello   ): \'%8s\'\n", "hello");
+  _printf(_putc, "-> TEST: string with width (should be hell):       \'%.4s\'\n", "hello");
 }

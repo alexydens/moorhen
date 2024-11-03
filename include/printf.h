@@ -8,15 +8,17 @@
 
 /* Consts */
 /* The flags */
-#define FORMAT_FLAGS_ZEROPAD    (1 << 0)
-#define FORMAT_FLAGS_FORCESIGN  (1 << 1)
+#define FORMAT_FLAGS_ZEROPAD      (1 << 0)
+#define FORMAT_FLAGS_FORCESIGN    (1 << 1)
+#define FORMAT_FLAGS_SPACESIGN    (1 << 2)
+#define FORMAT_FLAGS_BASESPECIFY  (1 << 3)
 /* (I don't implement the rest) */
 /* The length */
-#define FORMAT_LENGTH_BYTE      (1 << 0) /* 8 bits */
-#define FORMAT_LENGTH_SHORT     (1 << 1) /* 16 bits */
-#define FORMAT_LENGTH_INT       (1 << 2) /* 32 bits */
-#define FORMAT_LENGTH_LONG      (1 << 3) /* 64 bits */
-#define FORMAT_LENGTH_LONG_LONG (1 << 4) /* Also 64 bits */
+#define FORMAT_LENGTH_BYTE        (1 << 0) /* 8 bits */
+#define FORMAT_LENGTH_SHORT       (1 << 1) /* 16 bits */
+#define FORMAT_LENGTH_INT         (1 << 2) /* 32 bits */
+#define FORMAT_LENGTH_LONG        (1 << 3) /* 64 bits */
+#define FORMAT_LENGTH_LONG_LONG   (1 << 4) /* Also 64 bits */
 /* (I don't implement the rest) */
 /* Hex digits */
 const char HEXDIGITS[] = "0123456789abcdef";
@@ -58,7 +60,7 @@ static inline void _printf(void (*_putc)(char), const char *format, ...) {
       /* Format specifier: %[flags][width][.precision][length]specifier */
       /* Flags */
       state.flags = 0;
-      while (*ptr == '0' || *ptr == '+') {
+      while (*ptr == '0' || *ptr == '+' || *ptr == '#' || *ptr == ' ') {
         switch (*ptr) {
           case '0':
             state.flags |= FORMAT_FLAGS_ZEROPAD;
@@ -66,6 +68,14 @@ static inline void _printf(void (*_putc)(char), const char *format, ...) {
             break;
           case '+':
             state.flags |= FORMAT_FLAGS_FORCESIGN;
+            ptr++;
+            break;
+          case '#':
+            state.flags |= FORMAT_FLAGS_BASESPECIFY;
+            ptr++;
+            break;
+          case ' ':
+            state.flags |= FORMAT_FLAGS_SPACESIGN;
             ptr++;
             break;
         }
@@ -128,9 +138,15 @@ static inline void _printf(void (*_putc)(char), const char *format, ...) {
             _putc('-');
             arg.sint = -arg.sint;
             i++;
-          } else if (state.flags & FORMAT_FLAGS_FORCESIGN) {
-            _putc('+');
-            i++;
+          } else {
+            if (state.flags & FORMAT_FLAGS_FORCESIGN) {
+              _putc('+');
+              i++;
+            }
+            if (state.flags & FORMAT_FLAGS_SPACESIGN) {
+              _putc(' ');
+              i++;
+            }
           }
           digits = 0;
           signed_temp = arg.sint;
@@ -186,6 +202,11 @@ static inline void _printf(void (*_putc)(char), const char *format, ...) {
           /* Print hex */
           arg.uint = va_arg(args, u32);
           i = 0;
+          if (state.flags & FORMAT_FLAGS_BASESPECIFY) {
+            _putc('0');
+            _putc('x');
+            i += 2;
+          }
           digits = 0;
           unsigned_temp = arg.uint;
           while (unsigned_temp != 0) {
@@ -213,6 +234,11 @@ static inline void _printf(void (*_putc)(char), const char *format, ...) {
           /* Print hex, capital */
           arg.uint = va_arg(args, u32);
           i = 0;
+          if (state.flags & FORMAT_FLAGS_BASESPECIFY) {
+            _putc('0');
+            _putc('X');
+            i += 2;
+          }
           digits = 0;
           unsigned_temp = arg.uint;
           while (unsigned_temp != 0) {
