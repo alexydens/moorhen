@@ -2,6 +2,12 @@
 #ifndef MH_BASE_H
 #define MH_BASE_H
 
+/* If including standard lib, include some things */
+#ifdef MOORHEN_INCLUDE_STDLIB
+#include <stddef.h>
+#include <stdbool.h>
+#endif
+
 /* --- TYPES --- */
 
 /* UNSIGNED INTEGERS */
@@ -31,6 +37,7 @@ typedef float               f32;
 typedef double              f64;
 
 /* SIZE TYPES */
+#ifndef MOORHEN_INCLUDE_STDLIB
 #ifdef MOORHEN_SIZE_64
 /* A size type */
 typedef u64                 size_t;
@@ -48,6 +55,7 @@ typedef u64                 size_t;
 /* A signed size type */
 typedef i64                 ssize_t;
 #define MOORHEN_SIZE_64
+#endif
 #endif
 #endif
 
