@@ -82,24 +82,33 @@ static inline void _printf(void (*_putc)(char), const char *format, ...) {
       }
       /* Width */
       state.width = 0;
-      if (*ptr >= '0' && *ptr <= '9') {
-        state.width = 0;
-        while (*ptr >= '0' && *ptr <= '9') {
-          state.width *= 10;
-          state.width += *ptr - '0';
-          ptr++;
+      if (*ptr == '*') {
+        ptr++;
+        state.width = va_arg(args, u32);
+      } else {
+        if (*ptr >= '0' && *ptr <= '9') {
+          state.width = 0;
+          while (*ptr >= '0' && *ptr <= '9') {
+            state.width *= 10;
+            state.width += *ptr - '0';
+            ptr++;
+          }
         }
       }
       /* Precision */
       state.precision = 0;
       if (*ptr == '.') {
         ptr++;
-        state.precision = 0;
-        if (*ptr >= '0' && *ptr <= '9') {
-          while (*ptr >= '0' && *ptr <= '9') {
-            state.precision *= 10;
-            state.precision += *ptr - '0';
-            ptr++;
+        if (*ptr == '*') {
+          ptr++;
+          state.precision = va_arg(args, u32);
+        } else {
+          if (*ptr >= '0' && *ptr <= '9') {
+            while (*ptr >= '0' && *ptr <= '9') {
+              state.precision *= 10;
+              state.precision += *ptr - '0';
+              ptr++;
+            }
           }
         }
       }

@@ -34,6 +34,8 @@ void test_printf(void) {
   _printf(_putc, "-> TEST: hex with base (should be 0xe1a):          \'%#x\'\n", 0xe1a);
   _printf(_putc, "-> TEST: capital hex with base (should be 0xE1A):  \'%#X\'\n", 0xe1a);
   /* Test special formats for strings */
-  _printf(_putc, "-> TEST: string with padding (should be hello   ): \'%8s\'\n", "hello");
-  _printf(_putc, "-> TEST: string with width (should be hell):       \'%.4s\'\n", "hello");
+  _printf(_putc, "-> TEST: string with padding (should be hello   ): \'%8s\' (1)\n", "hello");
+  _printf(_putc, "-> TEST: string with width (should be hell):       \'%.4s\'     (1)\n", "hello");
+  _printf(_putc, "-> TEST: string with padding (should be hello   ): \'%*s\' (2)\n", 8, "hello");
+  _printf(_putc, "-> TEST: string with width (should be hell):       \'%.*s\'     (2)\n", 4, "hello");
 }
